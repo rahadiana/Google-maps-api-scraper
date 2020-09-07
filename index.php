@@ -13,26 +13,46 @@ foreach (glob("function/function_*.php") as $filename)
 
 
 $StartDirection ='cluster hibiscus bekasi';
-$EndDirection ='kantor walikota bekasi';
+$EndDirection ='kantor walikota kota indramayu';
 $lat="-6.243310";
 $long= "106.993720";
-$Adress = "Jl. Jend. Ahmad Yani, RT.001/RW.005, Marga Jaya, Kec. Bekasi Sel., Kota Bks, Jawa Barat 17141";
+$Adress = "jKantor Imigrasi Kelas II Non TPI Bekasi, Jalan Perjuangan, RT.002\/RW.001, Teluk Pucung, Kota Bekasi, Jawa Barat";
+
 //tes data uncomment for use
 
 /** convert Lat Long to Address **/
+
+
 //echo LatLongToAddres($lat,$long);
 
 /** convert Address to Lat Long **/
-//echo AddresToLatLong($Adress);
+
+//echo AddresToLatLong("jl a yani no 1 kota bekasi").PHP_EOL;
+
+
+
+
+
+
+
 
 /** Search Suggested Place **/
-//echo PlacePredictions($EndDirection);
+//echo PlacePredictions("kantor imigrasi bekasi");
 
-//echo PlaceDetails("kantor walikota bekasi");
-//belom
+//echo PlaceDetails("Kantor Imigrasi Kelas II Non TPI Bekasi, Jalan Perjuangan, RT.002\/RW.001, Teluk Pucung, Kota Bekasi, Jawa Barat");
+
 
 
 //echo RouteSearch($StartDirection,$EndDirection);
 
-//echo PlaceDetails("kantor walikota bekasi");
+//echo PlaceDetails("Kantor Imigrasi Kelas II Non TPI Bekasi, Jalan Perjuangan, RT.002\/RW.001, Teluk Pucung, Kota Bekasi, Jawa Barat");
 
+
+/** Search Elevation **/
+/*
+$lngOrig ="cluster hibiscus bekasi";  //OR "$lat,$long";
+$lngDest ="jl kh agus salim no 20 kota bekasi" //OR "$lat,$long";;
+$Num = 2; //num of sample
+
+echo Elevation($lngOrig,$lngDest,$Num);
+*/

@@ -276,7 +276,8 @@ function AddresToLatLong($address)
       $lat = $vla[0][1][1][14][9][2];
       $lng = $vla[0][1][1][14][9][3];
       $address = $vla[0][1][1][14][18];
-    }else{
+    }
+    else{
       $lat = $vla[0][1][0][14][9][2];
       $lng = $vla[0][1][0][14][9][3];
       $address = $vla[0][1][0][14][18];
@@ -450,5 +451,49 @@ function RouteSearch($StartDirection, $EndDirection)
 
     return json_encode($hasil);
 
+}
+
+//Elevation
+function QueryCheckerElevation($qc)
+{
+    $MatchLatLong = '/(\-?\d+(\.\d+)?),\s*(\-?\d+(\.\d+)?)$/';
+    if (preg_match($MatchLatLong, $qc, $start))
+    {
+       
+        $QueryCheckerElevation = $qc;
+    }
+    else
+    {
+        $AddresToLatLong = json_decode(AddresToLatLong($qc),true);
+        $QueryCheckerElevation = $AddresToLatLong[0]["lat"].','.$AddresToLatLong[0]["lng"];
+
+    };
+    return $QueryCheckerElevation;
+}
+
+
+function Elevation($lngOrig,$lngDest,$Num){
+
+    $lngOrig= QueryCheckerElevation($lngOrig);
+    $lngDest= QueryCheckerElevation($lngDest);
+
+$curl = curl_init();
+
+curl_setopt_array($curl, array(
+  CURLOPT_URL => "https://airlink-be.ui.com/api/v1/usgshgt/extendedpath/$lngOrig/$lngDest/$Num",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 0,
+  CURLOPT_FOLLOWLOCATION => true,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "GET",
+));
+
+$response = curl_exec($curl);
+
+curl_close($curl);
+
+return $response;
 }
 
